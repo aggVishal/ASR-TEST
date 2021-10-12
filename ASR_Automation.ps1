@@ -1,3 +1,4 @@
+param ($NoOfHoursToProfile=1, $GrowthFactor=30, $DesiredRPO=15, $projectName='testProject', $SASToken='sdzxcsdz')
 $serverType = read-host "Are you running this script on Host Server or a remote server (HS/RS)"
 $serverType = $serverType.ToLower()
 
@@ -35,23 +36,17 @@ if($serverType -ne 'rs'){
     }
 }
 
-# Variables entered by developers
-$NoOfHoursToProfile = 1
-$GrowthFactor = 30
-$DesiredRPO = 15
-$projectName = 'testProject1'
-$SASToken = '?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-29T20:31:52Z&st=2021-09-29T12:31:52Z&spr=https&sig=hW1qsLOGlLMNKIJ347e7vqrltFKfq%2Fi%2FdrRcljNJ1bA%3D'
-
 # PowerShell Commands
 $source = 'https://aka.ms/asr-deployment-planner'
 $destinationFolder = $locationOfTool
-$timestamp = Get-Date -Format o | ForEach-Object { $_ -replace “:”, “.” }
+$timestamp = Get-Date -Format o | ForEach-Object { $_ -replace ":","." }
 $zipName = '\ASRDeploymentPlanner-v2.52-' + $timestamp + '.zip'
 $zipFile = $destinationFolder + $zipName
+$directoryLocation = $destinationFolder + '\ASRDeploymentPlanner'
 Invoke-RestMethod  -Uri $source -OutFile $zipFile
+Remove-Item -Path $directoryLocation -Force
 Expand-Archive -LiteralPath $zipFile -DestinationPath $destinationFolder -Force | Out-Null
 Remove-Item -Path $zipFile -Force
-$directoryLocation = $destinationFolder + '\ASRDeploymentPlanner'
 
 Set-Location -Path $directoryLocation | Out-Null
 $profiledData = $directoryLocation + '\ProfiledData'
