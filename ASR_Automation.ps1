@@ -1,4 +1,10 @@
-param ($NoOfHoursToProfile=1, $GrowthFactor=30, $DesiredRPO=15, $projectName='testProject', $SASToken='sdzxcsdz')
+# Variables entered by developers
+$NoOfHoursToProfile = 1
+$GrowthFactor = 30
+$DesiredRPO = 15
+$projectName = 'testProject1'
+$SASToken = '?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-29T20:31:52Z&st=2021-09-29T12:31:52Z&spr=https&sig=hW1qsLOGlLMNKIJ347e7vqrltFKfq%2Fi%2FdrRcljNJ1bA%3D'
+
 $serverType = read-host "Are you running this script on Host Server or a remote server (HS/RS)"
 $serverType = $serverType.ToLower()
 
