@@ -50,7 +50,7 @@ $zipName = '\ASRDeploymentPlanner-v2.52-' + $timestamp + '.zip'
 $zipFile = $destinationFolder + $zipName
 $directoryLocation = $destinationFolder + '\ASRDeploymentPlanner'
 Invoke-RestMethod  -Uri $source -OutFile $zipFile
-Remove-Item -Path $directoryLocation -Force
+Remove-Item -Path $directoryLocation -Force -Recurse
 Expand-Archive -LiteralPath $zipFile -DestinationPath $destinationFolder -Force | Out-Null
 Remove-Item -Path $zipFile -Force
 
